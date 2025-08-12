@@ -11,6 +11,16 @@
   </head>
 
   <body>
+    <header>
+      <nav>
+        <% if user_signed_in? %>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしますか?" }  %>
+        <% else %>
+          <%= link_to "ログイン", new_user_session_path %>
+        <% end %>
+      </nav>
+    </header>
+
     <%= yield %>
   </body>
 </html>

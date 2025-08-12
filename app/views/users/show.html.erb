@@ -1,0 +1,6 @@
+<h2>マイプロフィール</h2>
+<p><strong>名前:</strong> <%= @user.name %></p>
+<p><srtong>携帯番号:</strong> <%= @user.phone_number %></p>
+<p><strong>メールアドレス:</strong> <%= @user.email %></p>
+
+<%= link_to '編集ページに進む', edit_user_registration_path %>

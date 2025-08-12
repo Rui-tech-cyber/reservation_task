@@ -3,6 +3,16 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
+    <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autocomplete: "name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone_number, '電話番号(ハイフンなし)' %><br />
+    <%= f.telephone_field :phone_number, autocomplete: "tel", placeholder: "例: 00011112222" %>
+  </div>
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

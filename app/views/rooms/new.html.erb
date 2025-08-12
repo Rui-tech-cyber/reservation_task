@@ -1,0 +1,19 @@
+<h1>新規施設作成</h1>
+
+<%= form_with model: @room, local: true, data: { turbolinks: false } do |f| %>
+  <p>
+    <%= f.label :name, "施設名" %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :description, "説明" %><br>
+    <%= f.text_area :description %>
+  </p>
+
+  <p>
+    <%= f.submit "作成" %>
+  </p>
+<% end %>
+
+<%= link_to "施設一覧に戻る", rooms_path %>

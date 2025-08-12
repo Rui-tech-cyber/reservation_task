@@ -1,0 +1,11 @@
+<h1>施設一覧</h1>
+
+<%= link_to "新規施設作成", new_room_path %>
+
+<ul>
+  <% @rooms.each do |room| %>
+    <li>
+      <%= link_to room.name, room_path(room) %>
+    </li>
+  <% end %>
+</ul>

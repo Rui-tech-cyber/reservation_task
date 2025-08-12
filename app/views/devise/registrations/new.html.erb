@@ -14,8 +14,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :phone_number %><br />
-    <%= f.text_field :phone_number %>
+    <%= f.label :phone_number, '電話番号(ハイフンなし)' %><br />
+    <%= f.telephone_field :phone_number, autocomplete: "tel", placeholder: "例: 00011112222" %>
   </div>
 
   <div class="field">

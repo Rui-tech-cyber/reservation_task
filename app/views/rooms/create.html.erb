@@ -1,0 +1,5 @@
+if @room.save
+  redirect_to @room, notice: "施設を作成しました。"
+else
+  render :new
+end
