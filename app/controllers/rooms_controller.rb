@@ -1,4 +1,6 @@
 class RoomsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @rooms = Room.all
   end
@@ -12,9 +14,9 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new(room_params)
+    @room = Room.new(room_params.merge(user: current_user))
     if @room.save
-      redirect_to rooms_path, notice: "施設を作成しました。"
+      redirect_to @room, notice: "施設を作成しました。"
     else
       render :new
     end
@@ -23,6 +25,6 @@ class RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:name, :description)
+    params.require(:room).permit(:name, :description, :price, :address)
   end
 end

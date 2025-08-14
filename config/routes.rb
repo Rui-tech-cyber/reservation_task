@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {
-    registrations: 'users/registrations'
-  }
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   
-  root "home#index"
+  root "rooms#index"
 
   resources :rooms, only: [:index, :show, :new, :create]
 end

@@ -1,14 +1,24 @@
 <h1>新規施設作成</h1>
 
-<%= form_with model: @room, local: true, data: { turbolinks: false } do |f| %>
+<%= form_with model: @room, local: false do |f| %>
   <p>
     <%= f.label :name, "施設名" %><br>
     <%= f.text_field :name %>
   </p>
 
   <p>
-    <%= f.label :description, "説明" %><br>
+    <%= f.label :description, "施設の説明文" %><br>
     <%= f.text_area :description %>
+  </p>
+
+  <p>
+    <%= f.label :price, "料金" %><br>
+    <%= f.number_field :price %>
+  </p>
+
+  <p>
+    <%= f.label :address, "住所" %><br>
+    <%= f.text_field :address %>
   </p>
 
   <p>
