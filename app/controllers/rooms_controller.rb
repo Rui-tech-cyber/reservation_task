@@ -7,6 +7,7 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
+    @reservations = @room.reservations.order(check_in: :asc)
   end
 
   def new

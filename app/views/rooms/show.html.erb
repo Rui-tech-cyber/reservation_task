@@ -1,3 +1,43 @@
 <h1><%= @room.name %></h1>
-<p><%= @room.description %></p>
-<%= link_to "施設一覧に戻る", rooms_path %>
+
+<p><strong>説明:</strong> <%= @room.description %></p>
+<p><strong>住所:</strong> <%= @room.address %></p>
+<p><strong>料金:</strong> <%= number_to_currency(@room.price, unit: "¥") %></p>
+<p><strong>登録者:</strong> <%= @room.user.email %></p>
+
+<hr>
+
+<%= link_to "予約する", new_room_reservation_path(@room), class: "btn btn-primary" %>
+<%= link_to "施設一覧に戻る", rooms_path, class: "btn btn-secondary" %>
+
+<h2>予約一覧</h2>
+
+<% if @reservations.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>チェックイン</th>
+        <th>チェックアウト</th>
+        <th>宿泊人数</th>
+        <th>予約者</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= reservation.check_in %></td>
+          <td><%= reservation.check_out %></td>
+          <td><%= reservation.guests %></td>
+          <td><%= reservation.user.email %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>まだ予約はありません。</p>
+<% end %>
+
+<hr>
+
+<%= link_to "予約する", new_room_reservation_path(@room), class: "btn btn-primary" %>
+<%= link_to "施設一覧に戻る", rooms_path, class: "btn btn-secondary" %>

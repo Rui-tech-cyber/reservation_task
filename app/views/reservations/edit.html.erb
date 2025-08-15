@@ -1,0 +1,37 @@
+<h1>予約内容の編集</h1>
+
+<% if @reservation.errors.any? %>
+  <div style="color: red;">
+    <h2><%= pluralize(@reservation.errors.count, "件のエラー") %>があります:</h2>
+    <ul>
+      <% @reservation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @reservation, local: true do |f| %>
+  <p>
+    <%= f.label :check_in, "チェックインする日付" %><br>
+    <%= f.date_field :check_in %>
+  </p>
+
+  <p>
+    <%= f.label :check_out, "チェックアウトする日付" %><br>
+    <%= f.date_field :check_out %>
+  </p>
+
+  <p>
+    <%= f.label :guests, "宿泊人数" %><br>
+    <%= f.number_field :guests, min: 1 %>
+  </p>
+
+  <p>
+    <%= f.submit "更新する", class: "btn btn-primary" %>
+  </p>
+<% end %>
+
+<hr>
+<%= link_to "予約一覧に戻る", reservations_path, class: "btn btn-secondary" %>
+<%= link_to "施設詳細に戻る", room_path(@room), class: "btn btn-secondary" %>
