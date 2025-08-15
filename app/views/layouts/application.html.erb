@@ -22,9 +22,9 @@
     <header>
       <nav>
         <% if user_signed_in? %>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしますか?" }  %>
+          <%= link_to t('navbar.logout'), destroy_user_session_path, method: :delete, data: { confirm: t('navbar.logout_confirm') }  %>
         <% else %>
-          <%= link_to "ログイン", new_user_session_path %>
+          <%= link_to t('navbar.login'), new_user_session_path %>
         <% end %>
       </nav>
     </header>

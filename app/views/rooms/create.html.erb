@@ -1,5 +1,5 @@
 if @room.save
-  redirect_to @room, notice: "施設を作成しました。"
+  redirect_to @room, notice: t('flash.notice.room_created')
 else
   render :new
 end

@@ -1,6 +1,6 @@
-<h1>施設一覧</h1>
+<h1><%= t('rooms.index.title') %></h1>
 
-<%= link_to "新規施設作成", new_room_path %>
+<%= link_to t('rooms.index.new_room'), new_room_path %>
 
 <ul>
   <% @rooms.each do |room| %>
@@ -10,22 +10,22 @@
   <% end %>
 </ul>
 
-<h2>施設を検索</h2>
+<h2><%= t('rooms.index.search_title') %></h2>
 
 <%= form_with url: rooms_path, method: :get, local: true do |f| %>
   <p>
-    <%= f.label :area, "エリア" %><br>
+    <%= f.label :area, t('rooms.index.area') %><br>
     <%= f.text_field :area, value: params[:area] %>
   </p>
 
   <p>
-    <%= f.label :keyword, "フリーワード" %><br>
+    <%= f.label :keyword, t('rooms.index.keyword') %><br>
     <%= f.text_field :keyword, value: params[:keyword] %>
   </p>
 
   <p>
-    <%= f.submit "検索", class: "btn btn-primary" %>
+    <%= f.submit t('rooms.index.search_button'), class: "btn btn-primary" %>
   </p>
 <% end %>
 
-<%= link_to "自分の予約一覧へ", reservations_path, class: "btn btn-secondary mb-3" %>
+<%= link_to t('rooms.index.my_reservations'), reservations_path, class: "btn btn-secondary mb-3" %>

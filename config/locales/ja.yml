@@ -1,0 +1,64 @@
+ja:
+  hello: "こんにちは"
+  rooms:
+    index:
+      title: "施設一覧"
+      new_room: "新規施設作成"
+      search_title: "施設を検索"
+      area: "エリア"
+      keyword: "フリーワード"
+      search_button: "検索"
+      my_reservations: "自分の予約一覧へ"
+    show:
+      description: "説明"
+      address: "住所"
+      price: "料金"
+      registered_by: "登録者"
+      book_now: "予約する"
+      reservation_list: "予約一覧"
+      reservation_user: "予約者"
+      no_reservations: "まだ予約はありません。"
+  flash:
+    notice:
+      reservation_created: "予約が完了しました。"
+      reservation_updated: "予約内容を更新しました。"
+      reservation_destroyed: "予約をキャンセルしました。"
+      room_created: "施設を作成しました。"
+  reservation:
+    check_in: "チェックインする日付"
+    check_out: "チェックアウトする日付"
+    guests: "宿泊人数"
+    edit_title: "予約内容の編集"
+    new_title: "予約フォーム"
+  errors:
+    messages:
+      count: "%{count}件のエラーがあります:"
+  actions:
+    update: "更新する"
+    reserve: "予約する"
+  links:
+    back_to_reservations: "予約一覧に戻る"
+  reservations:
+    index:
+      title: "自分の予約一覧"
+      room_name: "施設名"
+      actions: "操作"
+      cancel_confirm: "本当にキャンセルしますか？"
+      no_reservations: "まだ予約はありません。"
+  links:
+    back_to_room: "施設詳細に戻る"
+    back_to_rooms: "施設一覧に戻る"
+    edit: "編集"
+    cancel: "キャンセル"
+  new:
+    title: "新規施設作成"
+  form:
+    name: "施設名"
+    description: "施設の説明文"
+    price: "料金"
+    address: "住所"
+    create: "作成"
+  navbar:
+    login: "ログイン"
+    logout: "ログアウト"
+    logout_confirm: "ログアウトしますか？"

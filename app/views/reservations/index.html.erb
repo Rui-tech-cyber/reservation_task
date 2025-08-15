@@ -1,14 +1,14 @@
-<h1>自分の予約一覧</h1>
+<h1><%= t('reservations.index.title') %></h1>
 
 <% if @reservations.any? %>
   <table>
     <thead>
       <tr>
-        <th>施設名</th>
-        <th>チェックイン</th>
-        <th>チェックアウト</th>
-        <th>人数</th>
-        <th>操作</th>
+        <th><%= t('reservations.index.room_name') %></th>
+        <th><%= t('reservation.check_in') %></th>
+        <th><%= t('reservation.check_out') %></th>
+        <th><%= t('reservation.guests') %></th>
+        <th><%= t('reservations.index.actions') %></th>
       </tr>
     </thead>
     <tbody>
@@ -19,16 +19,16 @@
           <td><%= res.check_out %></td>
           <td><%= res.guests %></td>
           <td>
-            <%= link_to "編集", edit_reservation_path(res), class: "btn btn-sm btn-primary" %>
-            <%= link_to "キャンセル", reservation_path(res), method: :delete, data: { confirm: "本当にキャンセルしますか？" }, class: "btn btn-sm btn-danger" %>
+            <%= link_to t('links.edit'), edit_reservation_path(res), class: "btn btn-sm btn-primary" %>
+            <%= link_to t('links.cancel'), reservation_path(res), method: :delete, data: { confirm: t('resetvations.index.cancel_confirm') }, class: "btn btn-sm btn-danger" %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 <% else %>
-  <p>予約はまだありません。</p>
+  <p><%= t('reservations.index.no_reservations') %></p>
 <% end %>
 
 <hr>
-<%= link_to "施設一覧に戻る", rooms_path, class: "btn btn-secondary" %>
+<%= link_to t('links.back_to_rooms'), rooms_path, class: "btn btn-secondary" %>

@@ -1,29 +1,29 @@
-<h1>新規施設作成</h1>
+<h1><%= t('rooms.new.title') %></h1>
 
 <%= form_with model: @room, local: false do |f| %>
   <p>
-    <%= f.label :name, "施設名" %><br>
+    <%= f.label :name, t('rooms.form.name') %><br>
     <%= f.text_field :name %>
   </p>
 
   <p>
-    <%= f.label :description, "施設の説明文" %><br>
+    <%= f.label :description, t('rooms.form.description') %><br>
     <%= f.text_area :description %>
   </p>
 
   <p>
-    <%= f.label :price, "料金" %><br>
+    <%= f.label :price, t('rooms.form.price') %><br>
     <%= f.number_field :price %>
   </p>
 
   <p>
-    <%= f.label :address, "住所" %><br>
+    <%= f.label :address, t('rooms.form.address') %><br>
     <%= f.text_field :address %>
   </p>
 
   <p>
-    <%= f.submit "作成" %>
+    <%= f.submit t('rooms.form.create') %>
   </p>
 <% end %>
 
-<%= link_to "施設一覧に戻る", rooms_path %>
+<%= link_to t('links.back_to_rooms'), rooms_path %>

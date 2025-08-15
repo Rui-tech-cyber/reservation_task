@@ -1,25 +1,25 @@
 <h1><%= @room.name %></h1>
 
-<p><strong>説明:</strong> <%= @room.description %></p>
-<p><strong>住所:</strong> <%= @room.address %></p>
-<p><strong>料金:</strong> <%= number_to_currency(@room.price, unit: "¥") %></p>
-<p><strong>登録者:</strong> <%= @room.user.email %></p>
+<p><strong><%= t('rooms.show.description') %>:</strong> <%= @room.description %></p>
+<p><strong><%= t('rooms.show.address') %>:</strong> <%= @room.address %></p>
+<p><strong><%= t('rooms.show.price') %>:</strong> <%= number_to_currency(@room.price, unit: "¥") %></p>
+<p><strong><%= t('rooms.show.registered_by') %>:</strong> <%= @room.user.email %></p>
 
 <hr>
 
-<%= link_to "予約する", new_room_reservation_path(@room), class: "btn btn-primary" %>
-<%= link_to "施設一覧に戻る", rooms_path, class: "btn btn-secondary" %>
+<%= link_to t('rooms.show.book_now'), new_room_reservation_path(@room), class: "btn btn-primary" %>
+<%= link_to t('links.back_to_rooms'), rooms_path, class: "btn btn-secondary" %>
 
-<h2>予約一覧</h2>
+<h2><%= t('rooms.show.reservation_list') %></h2>
 
 <% if @reservations.any? %>
   <table class="table">
     <thead>
       <tr>
-        <th>チェックイン</th>
-        <th>チェックアウト</th>
-        <th>宿泊人数</th>
-        <th>予約者</th>
+        <th><%= t('reservation.check_in') %></th>
+        <th><%= t('reservation.check_out') %></th>
+        <th><%= t('reservation.guests') %></th>
+        <th><%= t('rooms.show.reservation_user') %></th>
       </tr>
     </thead>
     <tbody>
@@ -34,10 +34,10 @@
     </tbody>
   </table>
 <% else %>
-  <p>まだ予約はありません。</p>
+  <p><%= t('rooms.show.no_reservations') %></p>
 <% end %>
 
 <hr>
 
-<%= link_to "予約する", new_room_reservation_path(@room), class: "btn btn-primary" %>
-<%= link_to "施設一覧に戻る", rooms_path, class: "btn btn-secondary" %>
+<%= link_to t('rooms.show.book_now'), new_room_reservation_path(@room), class: "btn btn-primary" %>
+<%= link_to t('links.back_to_rooms'), rooms_path, class: "btn btn-secondary" %>
