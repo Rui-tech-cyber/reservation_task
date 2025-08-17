@@ -9,26 +9,42 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
 
     <% flash.each do |key, message| %>
-      <div class="alert alert-<%= key == "notice" ? "success" : "danger" %> alert-dismissible fade show" role="alert">
+      <div class="alert alert-<%= key.to_s == "notice" ? "success" : "danger" %>">
         <%= message %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     <% end %>
 
-    <header>
-      <nav>
+    <header style="display:flex; gap: 16px; align-items:center; padding:8px 12px; border-bottom:1px solid #ddd;">
+      <%= link_to "ReserveApp", root_path %>
+
+      <nav style="margin-left:auto;">
         <% if user_signed_in? %>
-          <%= link_to t('navbar.logout'), destroy_user_session_path, method: :delete, data: { confirm: t('navbar.logout_confirm') }  %>
+          <%= image_tag asset_path(current_user.avatar_filename_or_default), alt: "avatar", style: "width:28px;height:28px;border-radius:50%;vertical-align:middle;" %>
+          <div style="display:inline-block; position:relative;">
+            <details>
+              <summary style="cursor:pointer; display:inline-block; padding:4px 8px;">
+                <%= current_user.name.presence || current_user.email %>
+              </summary>
+              <div style="position:absolute; right:0; background:#fff; border:1px solid #ddd; padding:8px; z-index:10; min-width:160px;">
+                <%= link_to t('navbar.account'), account_path, style: "display:block; padding:6px 12px; text-decoration:none; color:#333;" %>
+                <%= link_to t('navbar.my_rooms'), rooms_path, style: "display:block; padding:6px 12px; text-decoration:none; color:#333;" %>
+                <%= link_to t('navbar.my_reservations'), reservations_path, style: "display:block; padding:6px 12px; text-decoration:none; color:#333;" %>
+                <%= link_to t('navbar.logout'), destroy_user_session_path, method: :delete, data: { confirm: t('navbar.logout_confirm') }, style: "display:block; padding:6px 12px; text-decoration:none; color:#333;" %>
+              </div>
+            </details>
+          </div>
         <% else %>
-          <%= link_to t('navbar.login'), new_user_session_path %>
+          <%= link_to t('navbar.login'), new_user_session_path %> |
+          <%= link_to t('navbar.signup'), new_user_registration_path %>
         <% end %>
       </nav>
     </header>
 
-    <%= yield %>
+    <div style="padding:16px;">
+      <%= yield %>
+    </div>
   </body>
 </html>

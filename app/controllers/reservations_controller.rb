@@ -1,10 +1,13 @@
 class ReservationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_room, only: [:new, :create]
-  before_action :set_reservation, only: [:edit, :update, :destroy]
+  before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
   def index
-    @reservations = current_user.reservations.includes(:room).order(check_in: :asc)
+    @reservations = current_user.reservations.includes(:room).order(created_at: :desc)
+  end
+
+  def show
   end
 
   def new
@@ -12,35 +15,36 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = @room.reservations.new(reservation_params)
-    @reservation.user = current_user
-
+    @reservation = @room.reservations.new(reservation_params.merge(user: current_user))
     if @reservation.save
-      redirect_to room_path(@room), notice: "予約が完了しました。"
+      @reservation.update(confirmed_at: Time.current)
+      redirect_to reservation_path(@reservation), notice: t("flash.notice.reservation_created")
     else
       render :new
     end
   end
 
   def edit
-    @reservation = Reservation.find(params[:id])
-    @room = @reservation.room
+    ensure_mine!
   end
 
   def update
-    @reservation = Reservation.find(params[:id])
-    @room = @reservation.room
+    ensure_mine!
     if @reservation.update(reservation_params)
-      redirect_to reservations_path, notice: "予約内容を更新しました。"
+      redirect_to reservation_path(@reservation), notice: t("flash.notice.reservation_updated")
     else
+      flash.now[:alert] = t("flash.alert.reservation_update_failed")
       render :edit
     end
   end
 
   def destroy
-    @reservation = Reservation.find(params[:id])
-    @reservation.destroy
-    redirect_to reservations_path, notice: "予約をキャンセルしました。"
+    ensure_mine!
+    if @reservation.destroy
+      redirect_to reservations_path, notice: t("flash.notice.reservation_destroyed")
+    else
+      redirect_to reservations_path, alert: t("flash.alert.reservation_destroy_failed")
+    end
   end
 
   private
@@ -50,7 +54,11 @@ class ReservationsController < ApplicationController
   end
 
   def set_reservation
-    @reservation = current_user.reservations.find(params[:id])
+    @reservation = Reservation.find(params[:id])
+  end
+
+  def ensure_mine!
+    redirect_to reservations_path, alert: t("flash.alert.not_authorized") unless @reservation.user_id == current_user.id
   end
 
   def reservation_params

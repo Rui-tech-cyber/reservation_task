@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations' }
-  
   root "rooms#index"
 
+  devise_for :users, controllers: {
+    registrations: "users/registrations"
+  }
+
   resources :rooms, only: [:index, :show, :new, :create] do
-    resources :reservations, only: [:new, :create]  
+    resources :reservations, only: [:new, :create] 
+    collection do
+      get :search 
+    end
   end
 
-  resources :reservations, only: [:index, :edit, :update, :destroy]
+  resources :reservations, only: [:index, :show, :edit, :update, :destroy]
+
+  resource :account, only: [:show], controller: "accounts"
 end

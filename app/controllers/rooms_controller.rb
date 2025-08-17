@@ -1,40 +1,48 @@
 class RoomsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:search, :show]
 
   def index
-    @rooms = Room.all
-
-    if params[:area].present?
-      @rooms = @rooms.where("address LIKE ?", "%#{params[:area]}%")
-    end
-
-    if params[:keyword].present?
-      keyword = "%#{params[:keyword]}%"
-      @rooms = @rooms.where("name LIKE ? OR address LIKE ?", keyword, keyword)
-    end
+    @rooms = current_user.rooms.order(created_at: :desc)
   end
 
   def show
     @room = Room.find(params[:id])
-    @reservations = @room.reservations.order(check_in: :asc)
+    @reservations = @room.reservations.includes(:user).order(check_in: :asc)
   end
 
   def new
-    @room = Room.new
+    @room = current_user.rooms.new
   end
 
   def create
-    @room = Room.new(room_params.merge(user: current_user))
+    @room = current_user.rooms.new(room_params)
     if @room.save
-      redirect_to @room, notice: "施設を作成しました。"
+      redirect_to @room, notice: t("flash.notice.room_created")
     else
       render :new
     end
   end
 
+  def search
+    @area = params[:area]
+    @keyword = params[:keyword]
+
+    scope = Room.all
+    if @area.present?
+      cities = %w(東京 大阪 京都 札幌)
+      if cities.include?(@area)
+        scope = scope.where("address LIKE ?", "%#{@area}%")
+      end
+    end
+    if @keyword.present?
+      scope = scope.where("name LIKE :q OR description LIKE :q", q: "%#{@keyword}%")
+    end
+    @rooms = scope.order(created_at: :desc)
+  end
+
   private
 
   def room_params
-    params.require(:room).permit(:name, :description, :price, :address)
+    params.require(:room).permit(:name, :description, :price, :address, :image, :image_filename)
   end
 end

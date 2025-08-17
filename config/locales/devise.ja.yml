@@ -1,0 +1,57 @@
+ja:
+  devise:
+    sessions:
+      new:
+        sign_in: "ログイン"
+        email: "メールアドレス"
+        password: "パスワード"
+        remember_me: "ログイン情報を記憶する"
+        submit: "ログイン"
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+    registrations:
+      new:
+        sign_up: "新規登録"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認用）"
+        submit: "アカウント登録"
+      edit:
+        edit_account: "アカウント情報を編集"
+        update: "更新する"
+        cancel: "アカウント削除"
+      signed_up: "アカウントを登録しました。"
+      updated: "アカウント情報を更新しました。"
+      destroyed: "アカウントを削除しました。"
+    passwords:
+      new:
+        forgot_password: "パスワードをリセット"
+        email: "メールアドレス"
+        submit: "リセット手順を送信"
+      edit:
+        change_password: "パスワードを変更"
+        new_password: "新しいパスワード"
+        confirm_password: "新しいパスワード（確認用）"
+        submit: "変更する"
+      send_instructions: "パスワード再設定用のメールを送信しました。"
+      updated: "パスワードを変更しました。"
+    confirmations:
+      new:
+        resend_instructions: "確認メールを再送する"
+        email: "メールアドレス"
+        submit: "送信する"
+      send_instructions: "確認メールを送信しました。"
+      confirmed: "メールアドレスを確認しました。"
+    shared:
+      links:
+        sign_up: "新規登録"
+        forgot_your_password: "パスワードをお忘れですか？"
+        sign_in: "ログイン"
+        back: "戻る"
+    failure:
+      unauthenticated: "ログインしてください。"
+      invalid: "メールアドレスまたはパスワードが正しくありません。"
+      already_authenticated: "すでにログイン済みです。"
+      unconfirmed: "メールアドレスの確認が必要です。"
+      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+      timeout: "セッションがタイムアウトしました。再度ログインしてください。"

@@ -1,17 +1,22 @@
 <h1><%= @room.name %></h1>
+<p><%= image_tag asset_path(@room.image_or_default), alt: @room.name, style: "width:360px;height:220px;object-fit:cover;" %></p>
 
 <p><strong><%= t('rooms.show.description') %>:</strong> <%= @room.description %></p>
 <p><strong><%= t('rooms.show.address') %>:</strong> <%= @room.address %></p>
-<p><strong><%= t('rooms.show.price') %>:</strong> <%= number_to_currency(@room.price, unit: "¥") %></p>
-<p><strong><%= t('rooms.show.registered_by') %>:</strong> <%= @room.user.email %></p>
+<p><strong><%= t('rooms.show.price') %>:</strong> <%= number_to_currency(@room.price, unit: "¥") %> / <%= t('rooms.labels.per_day') %></p>
+<p><strong><%= t('rooms.show.registered_by') %>:</strong>
+  <%= image_tag asset_path(@room.user.avatar_or_default), alt: "avatar", style: "width:20px;height:20px;border-radius:50%;vertical-align:middle;" %>
+  <%= @room.user.name.presence || @room.user.email %>
+</p>
 
 <hr>
 
-<%= link_to t('rooms.show.book_now'), new_room_reservation_path(@room), class: "btn btn-primary" %>
-<%= link_to t('links.back_to_rooms'), rooms_path, class: "btn btn-secondary" %>
+<p>
+  <%= link_to t('rooms.show.book_now'), new_room_reservation_path(@room), class: "btn btn-primary" %>
+  <%= link_to t('links.back_to_rooms'), rooms_path, class: "btn btn-secondary" %>
+</p>
 
 <h2><%= t('rooms.show.reservation_list') %></h2>
-
 <% if @reservations.any? %>
   <table class="table">
     <thead>
@@ -23,12 +28,12 @@
       </tr>
     </thead>
     <tbody>
-      <% @reservations.each do |reservation| %>
+      <% @reservations.each do |r| %>
         <tr>
-          <td><%= reservation.check_in %></td>
-          <td><%= reservation.check_out %></td>
-          <td><%= reservation.guests %></td>
-          <td><%= reservation.user.email %></td>
+          <td><%= ymd(r.check_in) %></td>
+          <td><%= ymd(r.check_out) %></td>
+          <td><%= r.guests %></td>
+          <td><%= r.user.name.presence || r.user.email %></td>
         </tr>
       <% end %>
     </tbody>
@@ -38,6 +43,7 @@
 <% end %>
 
 <hr>
-
-<%= link_to t('rooms.show.book_now'), new_room_reservation_path(@room), class: "btn btn-primary" %>
-<%= link_to t('links.back_to_rooms'), rooms_path, class: "btn btn-secondary" %>
+<p>
+  <%= link_to t('rooms.show.book_now'), new_room_reservation_path(@room), class: "btn btn-primary" %>
+  <%= link_to t('links.back_to_rooms'), rooms_path, class: "btn btn-secondary" %>
+</p>

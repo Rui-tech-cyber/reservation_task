@@ -1,64 +1,185 @@
 ja:
-  hello: "こんにちは"
-  rooms:
-    index:
-      title: "施設一覧"
-      new_room: "新規施設作成"
-      search_title: "施設を検索"
-      area: "エリア"
-      keyword: "フリーワード"
-      search_button: "検索"
-      my_reservations: "自分の予約一覧へ"
-    show:
-      description: "説明"
-      address: "住所"
-      price: "料金"
-      registered_by: "登録者"
-      book_now: "予約する"
-      reservation_list: "予約一覧"
-      reservation_user: "予約者"
-      no_reservations: "まだ予約はありません。"
-  flash:
-    notice:
-      reservation_created: "予約が完了しました。"
-      reservation_updated: "予約内容を更新しました。"
-      reservation_destroyed: "予約をキャンセルしました。"
-      room_created: "施設を作成しました。"
-  reservation:
-    check_in: "チェックインする日付"
-    check_out: "チェックアウトする日付"
-    guests: "宿泊人数"
-    edit_title: "予約内容の編集"
-    new_title: "予約フォーム"
+  devise:
+    sessions:
+      new:
+        sign_in: "ログイン"
+        email: "メールアドレス"
+        password: "パスワード"
+        remember_me: "ログイン状態を保持する"
+        submit: "ログイン"
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+    registrations:
+      new:
+        sign_up: "新規登録"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認用）"
+      edit:
+        edit_account: "アカウント情報を編集"
+        update: "更新する"
+        cancel_account: "アカウント削除"
+        are_you_sure: "本当によろしいですか？"
+        leave_blank: "変更しない場合は空欄のままにしてください"
+      signed_up: "アカウントを登録しました。"
+      updated: "アカウント情報を更新しました。"
+      destroyed: "アカウントを削除しました。"
+    passwords:
+      new:
+        forgot_your_password: "パスワードをお忘れですか？"
+        send_instructions: "パスワード再設定用のメールを送信"
+    shared:
+      links:
+        sign_up: "新規登録はこちら"
+        forgot_your_password: "パスワードをお忘れですか？"
+        sign_in: "ログインはこちら"
+    failure:
+      invalid: "メールアドレスまたはパスワードが正しくありません。"
+      unauthenticated: "ログインしてください。"
+      unconfirmed: "メールアドレスの確認が必要です。"
+      locked: "アカウントはロックされています。"
   errors:
     messages:
-      count: "%{count}件のエラーがあります:"
+      blank: "を入力してください"
+      invalid: "は不正な値です"
+      taken: "はすでに使用されています"
+      confirmation: "が一致しません"
+      too_short: "%{count}文字以上で入力してください"
+      too_long: "%{count}文字以内で入力してください"
+      greater_than: "%{count}より大きい値にしてください"
+      less_than: "%{count}より小さい値にしてください"
+      not_a_number: "は数値で入力してください"
+      count: "%{count}件のエラーがあります"
+      not_found: "が見つかりません"
+      not_saved: "%{count}件のエラーにより保存できませんでした"
+    custom:
+      check_in_today_or_later: "は今日以降の日付を入力してください"
+      check_out_after_check_in: "はチェックイン日より後の日付を入力してください"
+  activerecord:
+    models:
+      room: "施設"
+      reservation: "予約"
+      user: "ユーザー"
+    attributes:
+      reservation:
+        check_in: "チェックイン日"
+        check_out: "チェックアウト日"
+        guests: "宿泊人数"
+      room:
+        name: "施設名"
+        description: "施設説明"
+        address: "住所"
+        price: "料金"
+      user:
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認用）"
+  users:
+    edit:
+      title: "アカウント情報編集"
+      name: "名前"
+      email: "メールアドレス"
+      avatar: "アバター画像"
+      bio: "自己紹介"
+      password: "パスワード"
+      password_confirmation: "パスワード（確認用）"
+      current_password: "現在のパスワード"
+      update: "更新する"
+      cancel_account: "アカウント削除"
+      are_you_sure: "本当に削除してもよろしいですか？"
+    show:
+      title: "アカウント情報"
+      avatar: "アバター画像"
+      name: "名前"
+      email: "メールアドレス"
+      password: "パスワード"
+      bio: "自己紹介"
+      edit_account: "アカウント情報を更新"
+  date:
+    formats:
+      ymd: "%Y/%m/%d"
+      ymdhm: "%Y/%m/%d %H:%M"
+  time:
+    formats:
+      ymd: "%Y/%m/%d"
+      ymdhm: "%Y/%m/%d %H:%M"
+  reservation:
+    check_in: "チェックイン日"
+    check_out: "チェックアウト日"
+    guests: "宿泊人数"
+    new_title: "新規予約"
+    edit_title: "予約編集"
+  reservations:
+    index:
+      title: "予約一覧"
+      room_name: "施設名"
+      total_price: "合計料金"
+      confirmed_at: "予約日時"
+      actions: "操作"
+      cancel_confirm: "本当に予約をキャンセルしますか？"
+      no_reservations: "予約はまだありません"
+    show:
+      title: "予約詳細"
+      room: "施設"
+      stay_days: "宿泊日数"
+      total_price: "合計料金"
+      confirmed_at: "予約日時"
   actions:
     update: "更新する"
     reserve: "予約する"
   links:
     back_to_reservations: "予約一覧に戻る"
-  reservations:
-    index:
-      title: "自分の予約一覧"
-      room_name: "施設名"
-      actions: "操作"
-      cancel_confirm: "本当にキャンセルしますか？"
-      no_reservations: "まだ予約はありません。"
-  links:
     back_to_room: "施設詳細に戻る"
     back_to_rooms: "施設一覧に戻る"
     edit: "編集"
     cancel: "キャンセル"
-  new:
-    title: "新規施設作成"
+  rooms:
+    index:
+      title: "施設一覧"
+      new_room: "新規施設作成"
+      search_title: "施設検索"
+      area: "エリア"
+      keyword: "キーワード"
+      search_button: "検索"
+    labels:
+      daily_price: "料金"
+      per_day: "1日あたり"
+      created_at: "作成日"
+    new:
+      title: "新規施設作成"
+    search:
+      title: "検索結果"
+      total_count: "検索結果件数"
+    show:
+      description: "施設説明"
+      address: "住所"
+      price: "料金"
+      registered_by: "登録者"
+      book_now: "今すぐ予約する"
+      reservation_list: "予約一覧"
+      reservation_user: "予約者"
+      no_reservations: "予約はまだありません"
   form:
     name: "施設名"
-    description: "施設の説明文"
+    user_name: "ユーザー名"
+    description: "施設説明"
     price: "料金"
     address: "住所"
-    create: "作成"
+    room_image_filename: "施設画像ファイル名"
+    create: "作成する"
   navbar:
     login: "ログイン"
     logout: "ログアウト"
     logout_confirm: "ログアウトしますか？"
+    signup: "新規登録"
+    account: "アカウント"
+    my_rooms: "自分の施設"
+    my_reservations: "自分の予約"
+  flash:
+    notice:
+      reservation_created: "予約を作成しました。"
+      reservation_updated: "予約を更新しました。"
+      reservation_destroyed: "予約をキャンセルしました。"
+      room_created: "施設を作成しました。"
+      room_updated: "施設を更新しました。"
+      room_destroyed: "施設を削除しました。"

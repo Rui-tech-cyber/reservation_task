@@ -1,35 +1,19 @@
 <h1><%= t('reservation.new_title') %></h1>
 
 <% if @reservation.errors.any? %>
-  <div style="color: red;">
+  <div style="color:red;">
     <h2><%= t('errors.messages.count', count: @reservation.errors.count) %></h2>
     <ul>
-      <% @reservation.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+      <% @reservation.errors.full_messages.each { |m| %><li><%= m %></li><% } %>
     </ul>
   </div>
 <% end %>
 
 <%= form_with model: [@room, @reservation], local: true do |f| %>
-  <p>
-    <%= f.label :check_in, t('reservation.check_in') %><br>
-    <%= f.date_field :check_in %>
-  </p>
-
-  <p>
-    <%= f.label :check_out, t('reservation.check_out') %><br>
-    <%= f.date_field :check_out %>
-  </p>
-
-  <p>
-    <%= f.label :guests, t('reservation.guests') %><br>
-    <%= f.number_field :guests, min: 1 %>
-  </p>
-
-  <p>
-    <%= f.submit t('actions.reserve'), class: "btn btn-primary" %>
-  </p>
+  <p><%= f.label :check_in, t('reservation.check_in') %><br><%= f.date_field :check_in %></p>
+  <p><%= f.label :check_out, t('reservation.check_out') %><br><%= f.date_field :check_out %></p>
+  <p><%= f.label :guests, t('reservation.guests') %><br><%= f.number_field :guests, min: 1 %></p>
+  <p><%= f.submit t('actions.reserve'), class: "btn btn-primary" %></p>
 <% end %>
 
 <hr>

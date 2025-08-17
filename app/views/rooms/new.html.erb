@@ -1,29 +1,21 @@
 <h1><%= t('rooms.new.title') %></h1>
 
-<%= form_with model: @room, local: false do |f| %>
-  <p>
-    <%= f.label :name, t('rooms.form.name') %><br>
-    <%= f.text_field :name %>
-  </p>
-
-  <p>
-    <%= f.label :description, t('rooms.form.description') %><br>
-    <%= f.text_area :description %>
-  </p>
-
-  <p>
-    <%= f.label :price, t('rooms.form.price') %><br>
-    <%= f.number_field :price %>
-  </p>
-
-  <p>
-    <%= f.label :address, t('rooms.form.address') %><br>
-    <%= f.text_field :address %>
-  </p>
-
-  <p>
-    <%= f.submit t('rooms.form.create') %>
-  </p>
+<% if @room.errors.any? %>
+  <div style="color:red;">
+    <h2><%= t('errors.messages.count', count: @room.errors.count) %></h2>
+    <ul>
+      <% @room.errors.full_messages.each do |m| %><li><%= m %></li><% end %>
+    </ul>
+  </div>
 <% end %>
 
-<%= link_to t('links.back_to_rooms'), rooms_path %>
+<%= form_with model: @room, local: true do |f| %>
+  <p><%= f.label :name, t('form.name') %><br><%= f.text_field :name %></p>
+  <p><%= f.label :description, t('form.description') %><br><%= f.text_area :description %></p>
+  <p><%= f.label :price, t('form.price') %><br><%= f.number_field :price, min: 1 %></p>
+  <p><%= f.label :address, t('form.address') %><br><%= f.text_field :address %></p>
+  <p><%= f.label :image_filename, t('form.room_image_filename') %><br><%= f.text_field :image_filename, placeholder: "example.png（未入力なら既定画像）" %></p>
+  <p><%= f.submit t('form.create') %></p>
+<% end %>
+
+<p><%= link_to t('links.back_to_rooms'), rooms_path %></p>

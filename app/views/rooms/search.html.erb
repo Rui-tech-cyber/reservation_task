@@ -1,0 +1,31 @@
+<h1><%= t('rooms.search.title') %></h1>
+
+<p>
+  <%= t('rooms.search.total_count') %>: <strong><%= @rooms.count %></strong>
+</p>
+
+<%= form_with url: search_rooms_path, method: :get, local: true do |f| %>
+  <p>
+    <%= f.label :area, t('rooms.index.area') %><br>
+    <%= select_tag :area, options_for_select([["", ""], "東京", "大阪", "京都", "札幌"], @area) %>
+  </p>
+  <p>
+    <%= f.label :keyword, t('rooms.index.keyword') %><br>
+    <%= text_field_tag :keyword, @keyword %>
+  </p>
+  <p><%= f.submit t('rooms.index.search_button') %></p>
+<% end %>
+
+<hr>
+
+<% @rooms.each do |room| %>
+  <div style="display:flex; gap:12px; margin-bottom:16px;">
+    <%= image_tag asset_path(room.image_filename_or_default), alt: room.name, style: "width:160px;height:110px;object-fit:cover;" %>
+    <div>
+      <div><strong><%= link_to room.name, room_path(room) %></strong></div>
+      <div><%= room.address %></div>
+      <div><%= room.description %></div>
+      <div><%= t('rooms.labels.daily_price') %>: <%= number_to_currency(room.price, unit: "¥") %> / <%= t('rooms.labels.per_day') %></div>
+    </div>
+  </div>
+<% end %>

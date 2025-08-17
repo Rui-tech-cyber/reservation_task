@@ -1,0 +1,11 @@
+<h1><%= t('users.show.title') %></h1>
+
+<p>
+  <%= image_tag asset_path(current_user.avatar_or_default), alt: t('users.show.avatar'), style: "width:80px;height:80px;border-radius:50%;object-fit:cover;" %>
+</p>
+<p><strong><%= t('users.show.name') %>:</strong> <%= current_user.name %></p>
+<p><strong><%= t('users.show.email') %>:</strong> <%= current_user.email %></p>
+<p><strong><%= t('users.show.password') %>:</strong> *********</p>
+<p><strong><%= t('users.show.bio') %>:</strong> <%= current_user.bio.presence || "-" %></p>
+
+<p><%= link_to t('users.show.edit_account'), edit_user_registration_path %></p>
