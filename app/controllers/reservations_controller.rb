@@ -47,6 +47,14 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def confirm
+    @room = Room.find(params[:room_id])
+    @reservation = @room.reservations.new(reservation_params.merge(user: current_user))
+    unless @reservation.valid?
+      render :new
+    end
+  end
+
   private
 
   def set_room

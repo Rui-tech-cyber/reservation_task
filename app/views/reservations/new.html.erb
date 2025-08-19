@@ -9,7 +9,7 @@
   </div>
 <% end %>
 
-<%= form_with model: [@room, @reservation], local: true do |f| %>
+<%= form_with model: [@room, @reservation], url: confirm_room_reservations_path(@room), local: true do |f| %>
   <p><%= f.label :check_in, t('reservation.check_in') %><br><%= f.date_field :check_in %></p>
   <p><%= f.label :check_out, t('reservation.check_out') %><br><%= f.date_field :check_out %></p>
   <p><%= f.label :guests, t('reservation.guests') %><br><%= f.number_field :guests, min: 1 %></p>
