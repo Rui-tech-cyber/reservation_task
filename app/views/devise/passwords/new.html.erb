@@ -1,0 +1,20 @@
+<h2><%= t('devise.passwords.new.forgot_your_password') %></h2>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <p>
+    <%= f.label :email, t('devise.sessions.new.email') %><br />
+    <%= f.email_field :email, required: true %>
+  </p>
+
+  <p><%= f.submit t('devise.passwords.new.send_instructions') %></p>
+<% end %>
+
+<p>
+  <%= link_to t('devise.shared.links.sign_in'), new_user_session_path %>
+</p>
+
+<p>
+  <%= link_to t('devise.shared.links.sign_up'), new_user_registration_path %>
+</p>

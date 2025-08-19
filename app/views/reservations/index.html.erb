@@ -1,0 +1,37 @@
+<h1><%= t('reservations.index.title') %></h1>
+
+<% if @reservations.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= t('reservations.index.room_name') %></th>
+        <th><%= t('reservation.check_in') %></th>
+        <th><%= t('reservation.check_out') %></th>
+        <th><%= t('reservations.index.total_price') %></th>
+        <th><%= t('reservations.index.confirmed_at') %></th>
+        <th><%= t('reservations.index.actions') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |res| %>
+        <tr>
+          <td>
+            <%= image_tag asset_path(res.room.image_or_default), alt: res.room.name, style: "width:80px;height:60px;object-fit:cover;vertical-align:middle;margin-right:8px;" %>
+            <%= link_to res.room.name, reservation_path(res) %>
+            <div><small><%= res.room.description %></small></div>
+          </td>
+          <td><%= ymd(res.check_in) %></td>
+          <td><%= ymd(res.check_out) %></td>
+          <td><%= number_to_currency(res.total_price, unit: "¥") %></td>
+          <td><%= ymdhm(res.confirmed_at) %></td>
+          <td>
+            <%= link_to t('links.edit'), edit_reservation_path(res) %> |
+            <%= link_to t('links.cancel'), reservation_path(res), method: :delete, data: { confirm: t('reservations.index.cancel_confirm') } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p><%= t('reservations.index.no_reservations') %></p>
+<% end %>

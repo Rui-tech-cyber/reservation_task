@@ -1,0 +1,7 @@
+<h1><%= I18n.t('users.show.title') %></h1>
+<p><strong><%= t('users.show.avatar') %>:</strong> <%= image_tag @user.avatar_or_default %></p>
+<p><strong><%= t('users.show.name') %>:</strong> <%= @user.name %></p>
+<p><strong><%= t('users.show.email') %>:</strong> <%= @user.email %></p>
+<p><strong><%= t('users.show.password') %>:</strong> *********</p>
+<p><strong><%= t('users.show.bio') %>:</strong> <%= @user.bio.presence || "-" %></p>
+<%= link_to t('users.show.edit_account'), edit_user_registration_path, class: "btn btn-primary" %>

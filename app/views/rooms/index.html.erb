@@ -1,0 +1,40 @@
+<h1><%= t('rooms.index.title') %></h1>
+
+<p><%= link_to t('rooms.index.new_room'), new_room_path %></p>
+
+<%= form_with url: search_rooms_path, method: :get, local: true do |f| %>
+  <fieldset style="border:1px solid #ddd; padding:12px; margin:12px 0;">
+    <legend><%= t('rooms.index.search_title') %></legend>
+
+    <p>
+      <%= f.label :area, t('rooms.index.area') %><br>
+      <%= select_tag :area, options_for_select([["", ""], "東京", "大阪", "京都", "札幌"], params[:area]) %>
+    </p>
+
+    <p>
+      <%= f.label :keyword, t('rooms.index.keyword') %><br>
+      <%= text_field_tag :keyword, params[:keyword] %>
+    </p>
+
+    <p><%= f.submit t('rooms.index.search_button') %></p>
+  </fieldset>
+<% end %>
+
+<ul>
+  <% @rooms.each do |room| %>
+    <li style="margin-bottom:12px;">
+      <% if room.image.attached? %>
+        <%= image_tag url_for(room.image), alt: room.name, style: "width:120px;height:80px;object-fit:cover;" %>
+      <% else %>
+        <%= image_tag "default-institution-image.png", alt: room.name, style: "width:120px;height:80px;object-fit:cover;" %>
+      <% end %><br>
+
+      <%= link_to room.name, room_path(room) %><br>
+      <small>
+        <%= t('rooms.labels.daily_price') %>: <%= number_to_currency(room.price, unit: "¥") %> /
+        <%= t('rooms.labels.per_day') %> | 
+        <%= t('rooms.labels.created_at') %>: <%= ymd(room.created_at.to_date) %>
+      </small>
+    </li>
+  <% end %>
+</ul>

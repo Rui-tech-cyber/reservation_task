@@ -1,0 +1,15 @@
+<h1><%= t('reservations.show.title') %></h1>
+
+<p><strong><%= t('reservations.show.room') %>:</strong> <%= link_to @reservation.room.name, room_path(@reservation.room) %></p>
+<p><strong><%= t('reservation.check_in') %>:</strong> <%= ymd(@reservation.check_in) %></p>
+<p><strong><%= t('reservation.check_out') %>:</strong> <%= ymd(@reservation.check_out) %></p>
+<p><strong><%= t('reservations.show.stay_days') %>:</strong> <%= @reservation.stay_days %></p>
+<p><strong><%= t('reservation.guests') %>:</strong> <%= @reservation.guests %></p>
+<p><strong><%= t('reservations.show.total_price') %>:</strong> <%= number_to_currency(@reservation.total_price, unit: "¥") %></p>
+<p><strong><%= t('reservations.show.confirmed_at') %>:</strong> <%= ymdhm(@reservation.confirmed_at) %></p>
+
+<hr>
+<p>
+  <%= link_to t('links.back_to_reservations'), reservations_path, class: "btn btn-secondary" %>
+  <%= link_to t('links.back_to_rooms'), rooms_path, class: "btn btn-secondary" %>
+</p>

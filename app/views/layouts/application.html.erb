@@ -9,8 +9,46 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= yield %>
+
+    <% flash.each do |key, message| %>
+      <div class="alert alert-<%= key.to_s == "notice" ? "success" : "danger" %>">
+        <%= message %>
+      </div>
+    <% end %>
+
+    <header style="display:flex; gap: 16px; align-items:center; padding:8px 12px; border-bottom:1px solid #ddd;">
+      <%= link_to "ReserveApp", root_path %>
+
+      <nav style="margin-left:auto;">
+        <% if user_signed_in? %>
+          <% if current_user.avatar.attached? %>
+            <%= image_tag url_for(current_user.avatar), style: "width:28px;height:28px;border-radius:50%;object-fit:cover;" %>
+          <% else %>
+            <%= image_tag "default-avatar-image.png", alt: "アバター画像", style: "width:28px;height:28px;border-radius:50%;vertical-align:middle;object-fit:cover;" %>
+          <% end %>
+          <div style="display:inline-block; position:relative;">
+            <details>
+              <summary style="cursor:pointer; display:inline-block; padding:4px 8px;">
+                <%= current_user.name.presence || current_user.email %>
+              </summary>
+              <div style="position:absolute; right:0; background:#fff; border:1px solid #ddd; padding:8px; z-index:10; min-width:160px;">
+                <%= link_to t('navbar.account'), account_path, style: "display:block; padding:6px 12px; text-decoration:none; color:#333;" %>
+                <%= link_to t('navbar.my_rooms'), rooms_path, style: "display:block; padding:6px 12px; text-decoration:none; color:#333;" %>
+                <%= link_to t('navbar.my_reservations'), reservations_path, style: "display:block; padding:6px 12px; text-decoration:none; color:#333;" %>
+                <%= link_to t('navbar.logout'), destroy_user_session_path, method: :delete, data: { confirm: t('navbar.logout_confirm') }, style: "display:block; padding:6px 12px; text-decoration:none; color:#333;" %>
+              </div>
+            </details>
+          </div>
+        <% else %>
+          <%= link_to t('navbar.login'), new_user_session_path %> |
+          <%= link_to t('navbar.signup'), new_user_registration_path %>
+        <% end %>
+      </nav>
+    </header>
+
+    <div style="padding:16px;">
+      <%= yield %>
+    </div>
   </body>
 </html>

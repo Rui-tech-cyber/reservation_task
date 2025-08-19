@@ -1,0 +1,16 @@
+<h1><%= t('reservations.confirm.title', default: "予約確認") %></h1>
+
+<p><%= t('reservation.check_in') %>: <%= @reservation.check_in %></p>
+<p><%= t('reservation.check_out') %>: <%= @reservation.check_out %></p>
+<p><%= t('reservation.guests') %>: <%= @reservation.guests %></p>
+<p><%= t('reservations.show.total_price') %>: <%= @reservation.total_price %>円</p>
+
+<%= form_with model: [@room, @reservation], local: true do |f| %>
+  <%= f.hidden_field :check_in %>
+  <%= f.hidden_field :check_out %>
+  <%= f.hidden_field :guests %>
+  <p><%= f.submit t('actions.reserve'), class: "btn btn-primary" %></p>
+<% end %>
+
+<hr>
+<%= link_to t('links.back_to_room'), room_path(@room), class: "btn btn-secondary" %>
