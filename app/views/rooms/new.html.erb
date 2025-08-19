@@ -14,7 +14,18 @@
   <p><%= f.label :description, t('form.description') %><br><%= f.text_area :description %></p>
   <p><%= f.label :price, t('form.price') %><br><%= f.number_field :price, min: 1 %></p>
   <p><%= f.label :address, t('form.address') %><br><%= f.text_field :address %></p>
-  <p><%= f.label :image_filename, t('form.room_image_filename') %><br><%= f.text_field :image_filename, placeholder: "example.png（未入力なら既定画像）" %></p>
+  <p>
+  <%= f.label :image, t('form.room_image') %><br>
+  <%= f.file_field :image %>
+  </p>
+
+  <% if @room.image.attached? %>
+    <%= image_tag url_for(@room.image), alt: @room.name, style: "width:120px;height:80px;object-fit:cover;" %>
+  <% else %>
+    <%= image_tag "default-institution-image.png", alt: @room.name, style: "width:120px;height:80px;object-fit:cover;" %>
+  <% end %>
+
+
   <p><%= f.submit t('form.create') %></p>
 <% end %>
 

@@ -23,10 +23,17 @@
 <ul>
   <% @rooms.each do |room| %>
     <li style="margin-bottom:12px;">
-      <%= image_tag asset_path(room.image_or_default), alt: room.name, style: "width:120px;height:80px;object-fit:cover;" %><br>
+      <% if room.image.attached? %>
+        <%= image_tag url_for(room.image), alt: room.name, style: "width:120px;height:80px;object-fit:cover;" %>
+      <% else %>
+        <%= image_tag "default-institution-image.png", alt: room.name, style: "width:120px;height:80px;object-fit:cover;" %>
+      <% end %><br>
+
       <%= link_to room.name, room_path(room) %><br>
       <small>
-        <%= t('rooms.labels.daily_price') %>: <%= number_to_currency(room.price, unit: "¥") %> / <%= t('rooms.labels.per_day') %> | <%= t('rooms.labels.created_at') %>: <%= ymd(room.created_at.to_date) %>
+        <%= t('rooms.labels.daily_price') %>: <%= number_to_currency(room.price, unit: "¥") %> /
+        <%= t('rooms.labels.per_day') %> | 
+        <%= t('rooms.labels.created_at') %>: <%= ymd(room.created_at.to_date) %>
       </small>
     </li>
   <% end %>

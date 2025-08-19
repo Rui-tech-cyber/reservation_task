@@ -1,7 +1,11 @@
 <h1><%= t('users.show.title') %></h1>
 
 <p>
-  <%= image_tag asset_path(current_user.avatar_or_default), alt: t('users.show.avatar'), style: "width:80px;height:80px;border-radius:50%;object-fit:cover;" %>
+  <% if current_user.avatar.attached? %>
+    <%= image_tag url_for(current_user.avatar), style: "width:28px;height:28px;border-radius:50%;object-fit:cover;" %>
+  <% else %>
+    <%= image_tag "default-avatar-image.png", alt: "アバター画像", style: "width:28px;height:28px;border-radius:50%;vertical-align:middle;object-fit:cover;" %>
+  <% end %>
 </p>
 <p><strong><%= t('users.show.name') %>:</strong> <%= current_user.name %></p>
 <p><strong><%= t('users.show.email') %>:</strong> <%= current_user.email %></p>

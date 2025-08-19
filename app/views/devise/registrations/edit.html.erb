@@ -14,9 +14,19 @@
   </p>
 
   <p>
-    <%= f.label :avatar_filename, t('users.edit.avatar') %><br />
-    <%= f.text_field :avatar_filename, placeholder: "example.png（未入力なら既定画像）" %>
+    <%= f.label :avatar, t('users.edit.avatar') %><br />
+    <%= f.file_field :avatar %>
   </p>
+
+  <% if resource.avatar.attached? %>
+    <p>
+      <% if resource.avatar.variable? %>
+        <%= image_tag resource.avatar.variant(resize_to_limit: [100, 100]) %>
+      <% else %>
+        <%= image_tag resource.avatar %>
+      <% end %>
+    </p>
+  <% end %>
 
   <p>
     <%= f.label :bio, t('users.edit.bio') %><br />

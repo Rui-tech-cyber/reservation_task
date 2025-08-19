@@ -1,5 +1,12 @@
 <h1><%= @room.name %></h1>
-<p><%= image_tag asset_path(@room.image_or_default), alt: @room.name, style: "width:360px;height:220px;object-fit:cover;" %></p>
+
+<p>
+  <% if @room.image.attached? %>
+    <%= image_tag url_for(@room.image), alt: @room.name, style: "width:360px;height:220px;object-fit:cover;" %>
+  <% else %>
+    <%= image_tag "default-institution-image.png", alt: @room.name, style: "width:360px;height:220px;object-fit:cover;" %>
+  <% end %>
+</p>
 
 <p><strong><%= t('rooms.show.description') %>:</strong> <%= @room.description %></p>
 <p><strong><%= t('rooms.show.address') %>:</strong> <%= @room.address %></p>
